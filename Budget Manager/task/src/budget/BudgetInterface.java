@@ -1,16 +1,23 @@
 package budget;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class BudgetInterface {
     private Scanner scanner;
     private PurchaseList list;
-
+    private String fileName;
 
     public BudgetInterface() {
         scanner = new Scanner(System.in);
         list = new PurchaseList();
+        fileName = "purchases.txt";
+
+
     }
 
     public void start() {
@@ -30,6 +37,12 @@ public class BudgetInterface {
                 case 4:
                     showBalance();
                     break;
+                case 5:
+                    saveToFile();
+                    break;
+                case 6:
+                    loadFormFile();
+                    break;
                 case 0:
                     gotoExit = true;
                     break;
@@ -40,12 +53,26 @@ public class BudgetInterface {
         System.out.println("Bye!");
     }
 
+    private void loadFormFile() {
+        list.loadFormFile(fileName);
+        System.out.println("Purchases were loaded!");
+        System.out.println();
+    }
+
+    private void saveToFile() {
+        list.saveToFile(fileName);
+        System.out.println("Purchases were saved!");
+        System.out.println();
+    }
+
     private int ChooseAction() {
         System.out.println("Choose your action:");
         System.out.println("1) Add income");
         System.out.println("2) Add purchase");
         System.out.println("3) Show list of purchases");
         System.out.println("4) Balance");
+        System.out.println("5) Save");
+        System.out.println("6) Load");
         System.out.println("0) Exit");
         int action = Integer.parseInt(scanner.nextLine());
         System.out.println();
@@ -146,7 +173,7 @@ public class BudgetInterface {
                         break;
                     case 5:
                         System.out.println("All");
-                        showPurchasesByCategory(new Category[] {Category.FOOD, Category.CLOTHES, Category.ENTERTAIMENT, Category.OTHER, Category.OTHER});
+                        showPurchasesByCategory(new Category[] {Category.FOOD, Category.CLOTHES, Category.ENTERTAIMENT, Category.OTHER});
                         break;
                     case 6:
                         gotoExit = true;
@@ -165,10 +192,10 @@ public class BudgetInterface {
         double total = 0.0;
         if (!list.isEmpty() && list.existsOperationByCategories(cats)) {
             for (Purchase p : list.getPurchaseByCategories(cats)) {
-                System.out.println(p.getName() + " $" + p.getPrice());
+                System.out.println(String.format("%s $%.2f", p.getName() , p.getPrice()));
                 total += p.getPrice();
             }
-            System.out.println("Total sum: $" + total);
+            System.out.println(String.format("Total sum: $%.2f", total));
         } else {
             System.out.println("Purchase list is empty!");
         }
@@ -176,7 +203,8 @@ public class BudgetInterface {
     }
 
     private void showBalance() {
-        System.out.println("Balance: $"+list.getBalance());
+        System.out.println(String.format("Balance: $%.2f", list.getBalance()));
         System.out.println();
     }
 }
+

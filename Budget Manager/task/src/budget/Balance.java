@@ -7,12 +7,12 @@ public class Balance {
         this.balance = 0.0;
     }
 
-    public Balance(double balance) {
-        this.balance = balance;
+    public Balance(double sum) {
+        this.balance = sum;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setBalance(double sum) {
+        this.balance = sum;
     }
 
     public double getBalance() {
@@ -20,10 +20,10 @@ public class Balance {
     }
 
     public void add(double sum) {
-        this.balance += balance;
+        this.balance += sum;
     }
 
     public void sub(double sum) {
-        this.balance -= balance;
+        this.balance -= sum;
     }
 }
