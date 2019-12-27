@@ -1,12 +1,14 @@
 package budget;
 
-import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Main {
     public static void main(String[] args) {
         // write your code here
-        Scanner scanner = new Scanner(System.in);
+        BudgetManager bm = new BudgetManager();
+        bm.start();
+
+        /*Scanner scanner = new Scanner(System.in);
         ArrayList<String> l  = new ArrayList<>();
 
         while (scanner.hasNext()) {
@@ -19,7 +21,7 @@ public class Main {
             sum += Double.parseDouble(s.substring(s.lastIndexOf('$')+1));
         }
 
-        System.out.println("Total: $"+sum);
+        System.out.println("Total: $"+sum);*/
 
     }
 }
