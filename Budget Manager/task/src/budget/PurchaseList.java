@@ -34,7 +34,7 @@ public class PurchaseList {
     }
 
     ArrayList<Purchase> getPurchaseByCategories(Category[] categories) {
-        ArrayList<Purchase> p = new ArrayList<Purchase>();
+        ArrayList<Purchase> p = new ArrayList<>();
         for(Purchase pu : operations) {
             for(Category ca : categories) {
                 if (pu.getСategory() == ca) {
@@ -43,6 +43,30 @@ public class PurchaseList {
             }
         }
         return p;
+    }
+
+    double getSumByCategories(Category[] categories) {
+        double total = 0D;
+        ArrayList<Purchase> p = new ArrayList<>();
+        for(Purchase pu : operations) {
+            for(Category ca : categories) {
+                if (pu.getСategory() == ca) {
+                    total += pu.getPrice();
+                }
+            }
+        }
+        return total;
+    }
+
+    double getSumByCategory(Category ca) {
+        double total = 0D;
+        ArrayList<Purchase> p = new ArrayList<>();
+        for(Purchase pu : operations) {
+            if (pu.getСategory() == ca) {
+                total += pu.getPrice();
+            }
+        }
+        return total;
     }
 
     boolean existsOperationByCategories (Category[] categories) {
@@ -89,4 +113,6 @@ public class PurchaseList {
             System.out.println("File not found");
         }
     }
+
+
 }
